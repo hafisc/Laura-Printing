@@ -107,6 +107,12 @@ public class UserPanel extends JPanel {
         userTable.getColumnModel().getColumn(2).setPreferredWidth(125);  // Username
         userTable.getColumnModel().getColumn(3).setPreferredWidth(110);  // Role
 
+        // Penyelarasan kolom tabel secara rapi dan profesional
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        userTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // ID User
+        userTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Role
+
         JScrollPane tableScroll = new JScrollPane(userTable);
         tableScroll.setBorder(BorderFactory.createEmptyBorder());
         tableCard.add(tableScroll, BorderLayout.CENTER);
@@ -198,7 +204,7 @@ public class UserPanel extends JPanel {
         btnAdd.putClientProperty("JComponent.roundRect", true);
         btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        btnUpdate = new JButton("Update");
+        btnUpdate = new JButton("Perbarui");
         btnUpdate.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btnUpdate.putClientProperty("JComponent.roundRect", true);
         btnUpdate.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -206,6 +212,8 @@ public class UserPanel extends JPanel {
 
         btnDelete = new JButton("Hapus");
         btnDelete.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setBackground(new Color(239, 68, 68)); // Red 500
         btnDelete.putClientProperty("JComponent.roundRect", true);
         btnDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnDelete.setEnabled(false);

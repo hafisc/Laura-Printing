@@ -263,6 +263,18 @@ public class OrderPanel extends JPanel {
         cartTable.getColumnModel().getColumn(4).setPreferredWidth(100);  // Harga
         cartTable.getColumnModel().getColumn(5).setPreferredWidth(110);  // Subtotal
 
+        // Penyelarasan kolom tabel secara rapi dan profesional
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        cartTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // No
+        cartTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // Satuan
+        cartTable.getColumnModel().getColumn(3).setCellRenderer(centerRenderer); // Qty
+
+        javax.swing.table.DefaultTableCellRenderer rightRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        cartTable.getColumnModel().getColumn(4).setCellRenderer(rightRenderer); // Harga
+        cartTable.getColumnModel().getColumn(5).setCellRenderer(rightRenderer); // Subtotal
+
         JScrollPane cartScroll = new JScrollPane(cartTable);
         cartScroll.setBorder(BorderFactory.createEmptyBorder());
 
@@ -331,6 +343,7 @@ public class OrderPanel extends JPanel {
         txtPaidAmount.setPreferredSize(new Dimension(0, 38));
         txtPaidAmount.putClientProperty("JTextField.showClearButton", true);
         txtPaidAmount.putClientProperty("JComponent.roundRect", true);
+        txtPaidAmount.putClientProperty("JTextField.placeholderText", "Masukkan nominal pembayaran...");
         txtPaidAmount.setMaximumSize(new Dimension(Integer.MAX_VALUE, 38));
         txtPaidAmount.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -647,7 +660,7 @@ public class OrderPanel extends JPanel {
 
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         btnPanel.setBackground(Color.WHITE);
-        JButton btnPrint = new JButton("Cetak (Simpan Teks)");
+        JButton btnPrint = new JButton("Cetak Nota (TXT)");
         btnPrint.putClientProperty("JButton.buttonType", "accent");
         btnPrint.putClientProperty("JComponent.roundRect", true);
         

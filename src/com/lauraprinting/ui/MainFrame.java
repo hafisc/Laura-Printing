@@ -181,35 +181,37 @@ public class MainFrame extends JFrame {
         btn.setBorderPainted(false);
         btn.setFocusPainted(false);
         btn.setContentAreaFilled(false); // Mengaktifkan area transparan agar hover/highlight bekerja
-        btn.setOpaque(true);
+        btn.setOpaque(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
         btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
         btn.setHorizontalAlignment(SwingConstants.LEFT);
         btn.setBorder(new EmptyBorder(10, 18, 10, 18));
         btn.putClientProperty("JComponent.roundRect", true); // Membuat tombol bertipe pill rounded
-
+ 
         // Efek Hover (Sorot Kursor)
         btn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 // Hanya aktifkan efek hover jika tombol tidak sedang aktif/terpilih
                 if (btn.isEnabled() && !btn.getBackground().equals(new Color(79, 70, 229))) {
+                    btn.setOpaque(true);
                     btn.setContentAreaFilled(true);
                     btn.setBackground(new Color(30, 41, 59)); // Slate 800 (Hover)
                     btn.setForeground(Color.WHITE);
                 }
             }
-
+ 
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 // Kembalikan ke visual normal jika tidak terpilih
                 if (btn.isEnabled() && !btn.getBackground().equals(new Color(79, 70, 229))) {
+                    btn.setOpaque(false);
                     btn.setContentAreaFilled(false);
                     btn.setBackground(new Color(15, 23, 42));
                     btn.setForeground(new Color(148, 163, 184));
                 }
             }
         });
-
+ 
         // Aksi klik navigasi
         btn.addActionListener(e -> {
             if (cardName.equalsIgnoreCase("logout")) {
@@ -218,7 +220,7 @@ public class MainFrame extends JFrame {
                 showPanel(cardName);
             }
         });
-
+ 
         return btn;
     }
 
@@ -244,10 +246,12 @@ public class MainFrame extends JFrame {
             if (btn == null) continue;
             
             if (cards[i].equalsIgnoreCase(cardName)) {
+                btn.setOpaque(true);
                 btn.setContentAreaFilled(true);
                 btn.setBackground(new Color(79, 70, 229)); // Indigo 600 (Warna aktif)
                 btn.setForeground(Color.WHITE);
             } else {
+                btn.setOpaque(false);
                 btn.setContentAreaFilled(false);
                 btn.setBackground(new Color(15, 23, 42));   // Slate 900 (Warna pasif)
                 btn.setForeground(new Color(148, 163, 184)); // Slate 400

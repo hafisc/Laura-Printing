@@ -103,6 +103,12 @@ public class CustomerPanel extends JPanel {
         customerTable.getColumnModel().getColumn(2).setPreferredWidth(120);  // No. Telepon
         customerTable.getColumnModel().getColumn(3).setPreferredWidth(210);  // Alamat
 
+        // Penyelarasan kolom tabel secara rapi dan profesional
+        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        customerTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // ID Pelanggan
+        customerTable.getColumnModel().getColumn(2).setCellRenderer(centerRenderer); // No. Telepon
+
         JScrollPane tableScroll = new JScrollPane(customerTable);
         tableScroll.setBorder(BorderFactory.createEmptyBorder());
         tableCard.add(tableScroll, BorderLayout.CENTER);
@@ -185,7 +191,7 @@ public class CustomerPanel extends JPanel {
         btnAdd.putClientProperty("JComponent.roundRect", true);
         btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        btnUpdate = new JButton("Update");
+        btnUpdate = new JButton("Perbarui");
         btnUpdate.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btnUpdate.putClientProperty("JComponent.roundRect", true);
         btnUpdate.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -193,6 +199,8 @@ public class CustomerPanel extends JPanel {
 
         btnDelete = new JButton("Hapus");
         btnDelete.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setBackground(new Color(239, 68, 68)); // Red 500
         btnDelete.putClientProperty("JComponent.roundRect", true);
         btnDelete.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnDelete.setEnabled(false);

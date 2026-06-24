@@ -171,6 +171,20 @@ public class ReportPanel extends JPanel {
         ordersTable.getColumnModel().getColumn(4).setPreferredWidth(110);  // Uang Bayar
         ordersTable.getColumnModel().getColumn(5).setPreferredWidth(95);   // Status
 
+        // Penyelarasan kolom tabel secara rapi dan profesional
+        javax.swing.table.DefaultTableCellRenderer ordersCenterRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        ordersCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        ordersTable.getColumnModel().getColumn(0).setCellRenderer(ordersCenterRenderer); // ID Transaksi
+        ordersTable.getColumnModel().getColumn(1).setCellRenderer(ordersCenterRenderer); // Tanggal
+
+        javax.swing.table.DefaultTableCellRenderer ordersRightRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        ordersRightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        ordersTable.getColumnModel().getColumn(3).setCellRenderer(ordersRightRenderer); // Total Belanja
+        ordersTable.getColumnModel().getColumn(4).setCellRenderer(ordersRightRenderer); // Uang Bayar
+
+        // Pewarnaan status dengan renderer kustom
+        ordersTable.getColumnModel().getColumn(5).setCellRenderer(new com.lauraprinting.ui.component.StatusTableCellRenderer());
+
         JScrollPane ordersScroll = new JScrollPane(ordersTable);
         ordersScroll.setBorder(BorderFactory.createEmptyBorder());
 
@@ -228,6 +242,17 @@ public class ReportPanel extends JPanel {
         detailsTable.getColumnModel().getColumn(2).setPreferredWidth(70);   // Kuantitas
         detailsTable.getColumnModel().getColumn(3).setPreferredWidth(100);  // Harga Satuan
         detailsTable.getColumnModel().getColumn(4).setPreferredWidth(110);  // Subtotal
+
+        // Penyelarasan kolom tabel secara rapi dan profesional
+        javax.swing.table.DefaultTableCellRenderer detailsCenterRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        detailsCenterRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        detailsTable.getColumnModel().getColumn(1).setCellRenderer(detailsCenterRenderer); // Satuan
+        detailsTable.getColumnModel().getColumn(2).setCellRenderer(detailsCenterRenderer); // Kuantitas
+
+        javax.swing.table.DefaultTableCellRenderer detailsRightRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        detailsRightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        detailsTable.getColumnModel().getColumn(3).setCellRenderer(detailsRightRenderer); // Harga Satuan
+        detailsTable.getColumnModel().getColumn(4).setCellRenderer(detailsRightRenderer); // Subtotal
 
         JScrollPane detailsScroll = new JScrollPane(detailsTable);
         detailsScroll.setBorder(BorderFactory.createEmptyBorder());
@@ -301,9 +326,18 @@ public class ReportPanel extends JPanel {
         bottomCard.add(actionsSection, BorderLayout.EAST);
         splitPane.setBottomComponent(bottomCard);
 
-        // Panel Ringkasan Pendapatan (Bawah)
-        JPanel summaryPanel = new JPanel(new BorderLayout());
-        summaryPanel.setBackground(new Color(79, 70, 229)); // Aksen warna Indigo
+        // Panel Ringkasan Pendapatan (Bawah - Floating Rounded Card)
+        JPanel summaryPanel = new JPanel(new BorderLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setColor(new Color(79, 70, 229)); // Indigo 600
+                g2.fillRoundRect(0, 0, getWidth(), getHeight(), 16, 16);
+                g2.dispose();
+            }
+        };
+        summaryPanel.setOpaque(false);
         summaryPanel.setBorder(new EmptyBorder(12, 20, 12, 20));
         
         JLabel lblTotalLabel = new JLabel("TOTAL PENDAPATAN (OMSET) DI FILTER:");
@@ -540,7 +574,7 @@ public class ReportPanel extends JPanel {
             JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
             btnPanel.setBackground(Color.WHITE);
             
-            JButton btnPrint = new JButton("Cetak (Simpan Teks)");
+            JButton btnPrint = new JButton("Cetak Nota (TXT)");
             btnPrint.putClientProperty("JButton.buttonType", "accent");
             btnPrint.putClientProperty("JComponent.roundRect", true);
             

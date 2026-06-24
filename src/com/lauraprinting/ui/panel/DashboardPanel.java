@@ -3,10 +3,12 @@ package com.lauraprinting.ui.panel;
 import com.lauraprinting.dao.OrderDAO;
 import com.lauraprinting.model.Order;
 import com.lauraprinting.ui.component.ModernCard;
+import com.lauraprinting.ui.component.StatusTableCellRenderer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -120,6 +122,20 @@ public class DashboardPanel extends JPanel {
         recentOrdersTable.getColumnModel().getColumn(3).setPreferredWidth(110);  // Total Harga
         recentOrdersTable.getColumnModel().getColumn(4).setPreferredWidth(110);  // Bayar
         recentOrdersTable.getColumnModel().getColumn(5).setPreferredWidth(95);   // Status
+
+        // Penyelarasan Posisi (Alignments) Sel Tabel secara rapi dan profesional
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        recentOrdersTable.getColumnModel().getColumn(0).setCellRenderer(centerRenderer); // ID Transaksi
+        recentOrdersTable.getColumnModel().getColumn(1).setCellRenderer(centerRenderer); // Tanggal
+
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        recentOrdersTable.getColumnModel().getColumn(3).setCellRenderer(rightRenderer); // Total Harga
+        recentOrdersTable.getColumnModel().getColumn(4).setCellRenderer(rightRenderer); // Bayar
+
+        // Pewarnaan status dengan renderer kustom
+        recentOrdersTable.getColumnModel().getColumn(5).setCellRenderer(new StatusTableCellRenderer());
 
         JScrollPane tableScroll = new JScrollPane(recentOrdersTable);
         tableScroll.setBorder(BorderFactory.createEmptyBorder());

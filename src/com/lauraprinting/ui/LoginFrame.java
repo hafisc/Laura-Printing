@@ -45,7 +45,7 @@ public class LoginFrame extends JFrame {
 
         // 1. Judul Aplikasi (Logo)
         JLabel lblTitle = new JLabel("LAURA PRINTING", SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
         lblTitle.setForeground(new Color(79, 70, 229)); // Indigo 600
         
         gbc.gridx = 0;
@@ -64,7 +64,7 @@ public class LoginFrame extends JFrame {
 
         // Spacer / Jarak
         gbc.gridy = 2;
-        cardPanel.add(Box.createVerticalStrut(20), gbc);
+        cardPanel.add(Box.createVerticalStrut(25), gbc);
 
         // 3. Label Username
         JLabel lblUsername = new JLabel("Username");
@@ -116,7 +116,7 @@ public class LoginFrame extends JFrame {
         btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 14));
         btnLogin.setForeground(Color.WHITE);
         btnLogin.setBackground(new Color(79, 70, 229)); // Indigo 600
-        btnLogin.setPreferredSize(new Dimension(300, 40));
+        btnLogin.setPreferredSize(new Dimension(300, 42));
         btnLogin.putClientProperty("JButton.buttonType", "accent");
         btnLogin.putClientProperty("JComponent.roundRect", true);
         btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
